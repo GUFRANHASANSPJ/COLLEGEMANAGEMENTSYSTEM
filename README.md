@@ -5,9 +5,8 @@ The College Management System is a Django-based web application that facilitates
 <br>
 more. The system provides a user-friendly interface for administrators, faculty, and students to manage their
 <br>
- profiles, track academic progress, and stay updated with upcoming events and opportunities. Faculty members 
-<br>
- can also manage student marks, daily reports, and placements, making it an all-in-one solution for college 
+ profiles, track academic progress, and stay updated with upcoming events and opportunities.<br>
+ Faculty members can also manage student marks, daily reports, and placements, making it an all-in-one solution for college 
 <br>
  administration.
 
@@ -45,7 +44,7 @@ more. The system provides a user-friendly interface for administrators, faculty,
 git clone https://github.com/GUFRANHASANSPJ/COLLEGEMANAGEMENTSYSTEM.git
 ```
 
-2.  **Make sure you are in *RateMyNest* folder**
+2.  **Make sure you are in *COLLEGEMANAGEMENT* folder**
 
 
 3. **Active virtual environment (env)**
