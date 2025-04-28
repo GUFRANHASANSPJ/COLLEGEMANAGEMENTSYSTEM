@@ -1,0 +1,73 @@
+{% extends 'college/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+  .edit-student-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #f8f9fa;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  .edit-student-container h2, .edit-student-container h4 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  .edit-student-container hr {
+    margin: 40px 0;
+  }
+  .save-button {
+    display: block;
+    width: 220px;
+    margin: 30px auto 0;
+    font-size: 18px;
+  }
+  .card-form-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+</style>
+
+<div class="edit-student-container">
+  <h2>Edit Student Details</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="card-form-section">
+      <h4>Internship Details</h4>
+      {{ internship_form|crispy }}
+    </div>
+
+    <div class="card-form-section">
+      <h4>Placement Details</h4>
+      {{ placement_form|crispy }}
+    </div>
+
+    <div class="card-form-section">
+      <h4>Daily Status / Attendance</h4>
+      {{ daily_status_form|crispy }}
+    </div>
+
+    <div class="card-form-section">
+      <h4>Marks</h4>
+      {% for form in mark_forms %}
+        <div class="card mb-3 p-3">
+          {{ form|crispy }}
+        </div>
+      {% empty %}
+        <p class="text-center">No marks available.</p>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success save-button">Save All Changes</button>
+  </form>
+</div>
+
+{% endblock %}

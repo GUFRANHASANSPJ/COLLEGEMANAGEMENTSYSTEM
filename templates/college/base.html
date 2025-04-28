@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANGALOREUNIVERSITY</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" /> 
+</head>
+<style>
+    .large-links {
+        font-size: 1.5rem; 
+        color: #f4fbf5; 
+        text-decoration: none;
+        font-weight: bold; 
+    }
+    
+    .large-links:hover {
+        color: #0056b3; 
+        text-decoration: underline; 
+    }
+</style>
+<body>
+    <div class="bg-section">
+        
+        <nav class="navbar navbar-expand-lg" 
+            style="background-color: #040131; color: black; height: 5rem; padding: 1rem; margin-left: 0; width: 100%; position: fixed; top: 0; z-index: 1030;">
+        
+            <ul class="nav navbar" style="padding-left: 15%; padding-top: 15px; padding-right: 0; font-size: 1.2rem;">
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Acedimics</a></li>
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Contact</a></li>
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Activities</a></li>
+            </ul>
+        
+            <ul class="nav navbar ms-auto" style="display: flex; justify-content: flex-end; align-items: center; padding-left: 0; margin-left: 0;">
+                
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                        {% if user.is_student %}
+                        <a href="{% url 'student_dashboard' %}" class="large-links">
+                            {{ request.user.username }}
+                        </a>
+                        {% elif user.is_faculty %}
+                        <a href="{% url 'faculty_dashboard' %}" class="large-links">
+                            {{ request.user.username }}
+                        </a>
+                        {% else %}
+                        <a href="{% url 'student_dashboard' %}" class="large-links">
+                            Accounts
+                        </a>
+                        {% endif %}
+                    {% else %}
+                    <a class="nav-link text-white fw-bold large-links" href="{% url 'login' %}">
+                     Login
+                    </a>
+                    {% endif %}
+                </li>                
+                
+            </ul>
+    </nav>
+    <br><br><br>    
+</div>
+
+
+{% block content %}
+{% endblock %}
+<!-- Footer -->
+<footer class="text-white pt-5 pb-3 " style="background-color: #040131;">
+    <div class="container">
+            <div class="row">
+                <!-- Logo and About Text -->
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-warning fw-bold">BANGALOREUNIVERSITY</h5>
+                    <p>We can assist you in finding the ideal goal and the success of your dreams.</p>
+                    <div>
+                        <a href="#" class="me-3"><i class="bi bi-facebook fs-2" style="color: #335aae;"></i></a>
+                        <a href="#" class="me-3"><i class="bi bi-instagram fs-2" style="color: #E4405F;"></i></a>
+                        <a href="#" class="me-3"><i class="bi bi-twitter fs-2" style="color: #1DA1F2;"></i></a>
+                        <a href="#"><i class="bi bi-youtube fs-2" style="color: #FF0000;"></i></a>
+                    </div>
+                    
+                </div>
+                
+                <!-- Links -->
+                <div class="col-md-4 mb-3">
+                    <h5>GENERAL INFO</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Our Acedemics</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Gallery</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="col-md-4 mb-3">
+                    <h5>CONTACTS</h5>
+                    <p class="mb-1">
+                        <i class="bi bi-telephone-fill me-2" style="font-size: 1.5rem; color: blue;"></i>(+1) 123-456-7890
+                    </p>
+                    <p class="mb-1">
+                        <i class="bi bi-envelope-fill me-2" style="font-size: 1.5rem; color: green;"></i>contact@bangaloreuniversity.in
+                    </p>
+                    <p>
+                        <i class="bi bi-geo-alt-fill me-2" style="font-size: 1.5rem; color: red;"></i>123 Main Street, btm, IL, 560076
+                    </p>
+                </div>
+                
+                
+            </div>
+            
+            <!-- Bottom Text -->
+            <div class="text-center mt-4">
+                <p class="mb-1">&copy; 2025 BANGALOREUNIVERSITY. All Rights Reserved</p>
+                <a href="#" class="text-white text-decoration-none me-2">Terms & Condition</a> |
+                <a href="#" class="text-white text-decoration-none ms-2">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS Bundle -->
+    <!-- login modals -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Login Form -->
+                    <form id="loginForm" method="POST" action="{% url 'login' %}" style="display: block;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="loginEmail" name="username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <small>
+                                <a href="#" class="text-primary" style="text-decoration: none;">
+                                    Forgot Password?
+                                </a>
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                    </form>
+                    <div class="text-center my-3">
+                        <small>Or login with</small>
+                    </div>
+                    <!-- Social Login Buttons -->
+                    <div class="d-flex flex-column gap-3">
+                        <a href="#" class="btn w-100 text-white d-flex align-items-center justify-content-center" style="background-color: #DB4437;">
+                            <i class="fab fa-google me-2"></i> Google
+                        </a>
+                        <a href="#" class="btn w-100 text-white d-flex align-items-center justify-content-center" style="background-color: #4267B2;">
+                            <i class="fab fa-facebook me-2"></i> Facebook
+                        </a>
+                        <a href="#" class="btn w-100 text-white d-flex align-items-center justify-content-center" style="background-color: #000000;">
+                            <i class="fab fa-apple me-2"></i> Apple
+                        </a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Redirect to role selection on click -->
+                        <small id="toggleAuthForm" class="text-primary" style="cursor: pointer;">
+                            Don't have an account? Sign Up
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Role Selection Modal -->
+        <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="roleModalLabel">Sign Up</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p class="mb-4">Are you signing up as a Student or Faculty ?</p>
+                            <button id="chooseRegular" class="btn btn-primary w-100 mb-3">Student</button>
+                            <button id="chooseOwner" class="btn btn-secondary w-100">Faculty</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authModal = new bootstrap.Modal(document.getElementById("authModal"));
+            const roleModal = new bootstrap.Modal(document.getElementById("roleModal"));
+            const loginForm = document.getElementById("loginForm");
+            
+            document.querySelectorAll("a.nav-link[href='{% url 'login' %}']").forEach(loginLink => {
+                loginLink.addEventListener("click", (e) => {
+                    e.preventDefault(); 
+                    loginForm.style.display = "block"; 
+                    document.getElementById("authModalLabel").textContent = "Login"; 
+                    authModal.show(); 
+                });
+            });
+        
+            const toggleAuthForm = document.getElementById("toggleAuthForm");
+            toggleAuthForm.addEventListener("click", () => {
+                authModal.hide(); 
+                roleModal.show(); 
+            });
+        
+            document.getElementById("chooseRegular").addEventListener("click", () => {
+                window.location.href = "{% url 'studentreg' %}";
+            });
+        
+            document.getElementById("chooseOwner").addEventListener("click", () => {
+                window.location.href = "{% url 'facultyreg' %}"; 
+            });
+        });
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+</body>
+
+
+</html>

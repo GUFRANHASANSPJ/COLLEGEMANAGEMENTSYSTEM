@@ -1,0 +1,280 @@
+{% extends 'college/base.html' %}
+{% block content %}
+<title>Student Dashboard</title>
+<style>
+    /* General Container Styling */
+    .student-info-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Profile Image as Circle */
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+
+    .student-info p {
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .student-info p strong {
+        font-weight: bold;
+    }
+
+    /* Table Styling */
+    table { 
+        width: 50%; 
+        margin: 30px auto; 
+        border-collapse: collapse; 
+    }
+    th, td { 
+        border: 1px solid #ddd; 
+        padding: 12px; 
+        text-align: center; 
+    }
+    th { 
+        background-color: #f2f2f2; 
+    }
+
+    .table-container {
+        margin-bottom: 50px;
+    }
+
+    /* Logout Button */
+    .logout-button {
+        position: absolute;
+        top: 120px;
+        right: 30px;
+    }
+    .logout-button a {
+        padding: 10px 20px;
+        background-color: #ff4d4d;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .logout-button a:hover {
+        background-color: #e60000;
+    }
+
+    /* Heading Styling */
+    h2, h3 {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .student-info-container {
+        position: relative;
+    }
+    
+    .edit-button-container {
+        position: absolute;
+        top: 110px;
+        right: 150px;
+    }
+    
+    .edit-button-container .btn {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    
+    .edit-button-container .btn:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<!-- Logout Button -->
+<div class="logout-button">
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
+<!-- Edit Profile Button -->
+<div class="edit-button-container">
+    <a href="{% url 'edit_student_profile' student_profile.id %}" class="btn btn-primary">Edit Profile</a>
+</div>
+<!-- Welcome Header -->
+<h2>Welcome, {{ student_profile.full_name }}!</h2>
+
+<!-- Profile Image and Information -->
+<div class="student-info-container">
+    {% if student_profile.image %}
+        <img src="{{ student_profile.image.url }}" alt="Profile Image" class="profile-image">
+    {% else %}
+        <img src="static\images\default.png" alt="Default Profile Image" class="profile-image">
+    {% endif %}
+    <!-- Edit Profile Button -->
+    <table class="student-info-table">
+        <tr>
+            <th>Name</th>
+            <td>{{ student_profile.full_name }}</td>
+        </tr>
+        <tr>
+            <th>Course</th>
+            <td>{{ student_profile.course }}</td>
+        </tr>
+        <tr>
+            <th>Enrollment Number</th>
+            <td>{{ student_profile.enrollment_number }}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{ student_profile.phone }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ student_profile.address }}</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Student Marks Table -->
+<div class="table-container">
+    <h3>Student Marks</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in student_marks %}
+            <tr>
+                <td>{{ mark.subject }}</td>
+                <td>{{ mark.marks }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No marks available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Daily Status Table -->
+<div class="table-container">
+    <h3>Daily Status</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for status in daily_status %}
+            <tr>
+                <td>{{ status.date }}</td>
+                <td>{{ status.status }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No daily status recorded.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Internship Details Table -->
+<div class="table-container">
+    <h3>Internship Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for internship in internship_details %}
+            <tr>
+                <td>{{ internship.company_name }}</td>
+                <td>{{ internship.duration }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No internship details available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Available Events Table -->
+<div class="table-container">
+    <h3>Available Events</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No events available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Placement Opportunities Table -->
+<div class="table-container">
+    <h3>Placement Opportunities</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Job Role</th>
+                <th>Package</th>
+                <th>Skills Required</th>
+                <th>Action</th> <!-- Added for the Apply button -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for placement in placements %}
+            <tr>
+                <td>{{ placement.company_name }}</td>
+                <td>{{ placement.job_role }}</td>
+                <td>{{ placement.package }}</td>
+                <td>{{ placement.skills_required }}</td>
+                <td>
+                    <!-- Apply Button -->
+                    <form method="POST" action="#">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Apply</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No placement opportunities available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

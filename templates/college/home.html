@@ -1,0 +1,92 @@
+{% extends 'college/base.html' %}
+
+{% block content %}
+{% load static%}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://media.uem.edu.in/uploads/2025/04/Banner-11.avif" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item ">
+            <img src="https://media.uem.edu.in/uploads/2025/04/Banner-12.avif" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item ">
+            <img src="https://media.uem.edu.in/uploads/2025/04/Banner-1.avif" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item ">
+            <img src="{% static 'images\banner\6.jpg'%}" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<br>
+
+<!-- Main Container for Home Page -->
+
+<!-- Summary Section -->
+<div class="section summary-section" style="background-color: #f0f8ff;">
+    <h2>Summary</h2>
+    <p>
+        Welcome to our College Management System. Here we manage all aspects of college operations from student enrollment to faculty management, ensuring a seamless experience for students and staff. 
+        Our system streamlines academic records, course management, examinations, and administrative services, helping institutions maintain a well-organized environment. 
+        With a user-friendly interface and powerful backend support, we ensure that both students and faculty experience smooth and efficient communication. 
+        From handling admissions to tracking student progress and faculty performance, our platform offers a one-stop solution for all college-related activities.
+        We continuously upgrade our system with the latest technology trends to enhance efficiency and productivity across departments.
+    </p>
+</div>
+
+<!-- About Us Section -->
+<div class="section about-us-section" style="background-color: #e6ffe6;">
+    <h2>About Us</h2>
+    <p>
+        Our institution has been committed to providing top-quality education and fostering an environment where students can achieve their full potential. 
+        We focus on academic excellence, innovation, and the holistic development of our students. Established with the vision to create future leaders, 
+        our college emphasizes critical thinking, ethical leadership, and global citizenship. Our experienced faculty members, advanced research facilities, 
+        and strong industry partnerships ensure students receive hands-on experience along with theoretical knowledge. 
+        We believe in nurturing talent through personalized guidance, extracurricular activities, and continuous mentoring. 
+        Our vibrant campus life, inclusive culture, and emphasis on innovation make us a preferred destination for learners seeking growth and success.
+    </p>
+</div>
+
+<!-- Vision and Mission Section -->
+<div class="section vision-mission-section" style="background-color: #fff0f5;">
+    <h2>Vision and Mission</h2>
+    <p><strong>Vision:</strong> To be a leader in providing quality education that empowers individuals to succeed in a global society. 
+    We envision a future where every student is equipped with the knowledge, skills, and confidence to meet the challenges of a dynamic world. 
+    We strive to inspire lifelong learning and promote a culture of integrity, innovation, and inclusivity.</p>
+
+    <p><strong>Mission:</strong> To deliver a comprehensive educational experience, promoting innovation, critical thinking, and creativity among our students. 
+    Our mission is to cultivate a spirit of inquiry, a passion for discovery, and a dedication to service. 
+    We are committed to fostering academic excellence, encouraging research and collaboration, and preparing students to be responsible global citizens who contribute positively to society. 
+    Through continuous improvement and community engagement, we aim to make a lasting impact on the world around us.
+    </p>
+</div>
+
+<!-- Infrastructure Details Section -->
+<div class="section infrastructure-details-section" style="background-color: #ffffe0;">
+    <h2>Infrastructure Details</h2>
+    <p>
+        Our campus is equipped with state-of-the-art facilities, including modern classrooms, advanced laboratories, a spacious library, and sports complexes. 
+        We ensure that every student has access to the resources needed for academic and personal growth. 
+        The laboratories are furnished with the latest equipment to support practical learning and innovation. 
+        Our library houses an extensive collection of books, journals, digital resources, and study materials, creating a knowledge-rich environment. 
+        Recreational areas, cafeterias, and wellness centers add to the overall experience, making the campus lively and student-friendly. 
+        High-speed internet connectivity, smart classrooms, and eco-friendly green spaces further enhance the learning atmosphere. 
+        We continually invest in expanding and upgrading our infrastructure to keep pace with the evolving needs of education.
+    </p>
+</div>
+
+
+
+
+
+{% endblock %}

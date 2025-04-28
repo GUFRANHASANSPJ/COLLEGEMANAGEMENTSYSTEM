@@ -1,0 +1,214 @@
+{% extends 'college/base.html' %}
+
+{% block content %}
+<title>Faculty Dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    table { width: 60%; margin: 30px auto; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    h2 { text-align: center; margin-top: 30px; }
+    .faculty-info { text-align: center; margin: 20px 0; }
+    .faculty-info p { font-size: 18px; }
+    .logout-button { position: absolute; top: 120px; right: 30px; }
+    .logout-button a {
+        padding: 10px 20px;
+        background-color: #ff4d4d;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .logout-button a:hover { background-color: #e60000; }
+    .action-buttons {
+        text-align: center;
+        margin-top: 130px;
+    }
+    .action-buttons button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+    }
+    .add-event { background-color: #4CAF50; }
+    .add-placement { background-color: #2196F3; }
+
+    .edit-button-container {
+      position: absolute;
+      top: 110px;
+      right: 150px;
+  }
+  
+  .edit-button-container .btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+  }
+</style>
+
+<div class="logout-button">
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
+<!-- Edit Profile Button -->
+<div class="edit-button-container">
+  <a href="{% url 'edit_faculty_profile' faculty_profile.id %}" class="btn btn-primary">Edit Profile</a>
+</div>
+
+<h2>Welcome, {{ faculty_profile.full_name }}!</h2>
+
+<div class="container mt-5">
+  <div class="card mx-auto" style="max-width: 700px;">
+      <div class="row no-gutters">
+          <div class="col-md-4" style="display: flex; align-items: center; justify-content: center;">
+              {% if faculty_profile.image %}
+                  <img src="{{ faculty_profile.image.url }}" class="card-img" alt="Faculty Image" style="max-height: 200px; object-fit: cover; border-radius: 50%; padding: 10px;">
+              {% else %}
+                  <img src="#" class="card-img" alt="Default Image" style="max-height: 200px; object-fit: cover; border-radius: 50%; padding: 10px;">
+              {% endif %}
+          </div>
+          <div class="col-md-8">
+              <div class="card-body">
+                  <p class="card-text"><strong>Name:</strong> {{ faculty_profile.full_name }}</p>
+                  <p class="card-text"><strong>Phone:</strong> {{ faculty_profile.phone }}</p>
+                  <p class="card-text"><strong>Address:</strong> {{ faculty_profile.address }}</p>
+                  <p class="card-text"><strong>Professional Details:</strong> {{ faculty_profile.professional_details }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<br><br>
+<div style="text-align:center; margin-bottom: 100px;">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEventModal" style="margin-right: 10px;">Add Event</button>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPlacementModal" style="margin-right: 10px;">Add Placement</button>
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addDailyStatusModal" style="margin-right: 10px;">Add Daily Status</button>
+  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addStudentMarkModal" style="margin-right: 10px;">Add Student Mark</button>
+  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addInternshipModal" style="margin-right: 10px;">Add Internship</button>
+  <a href="{% url 'show_all_students' %}" class="btn btn-dark">Show All Students</a>
+  <a href="{% url 'show_all_companies' %}" class="btn btn-dark"> All Placement Company</a>
+</div>
+
+
+
+<!-- Add Event Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="{% url 'add_event' %}">
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEventModalLabel">Add Event</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ event_form.as_p }}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Add Event</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Placement Modal -->
+<div class="modal fade" id="addPlacementModal" tabindex="-1" role="dialog" aria-labelledby="addPlacementModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="{% url 'add_placement' %}">
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPlacementModalLabel">Add Placement</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ placement_form.as_p }}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Placement</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- internship modals -->
+<div class="modal fade" id="addInternshipModal" tabindex="-1" role="dialog" aria-labelledby="addInternshipModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="post" action="{% url 'add_internship' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addInternshipModalLabel">Add Internship</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+            {{ internship_form.as_p }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary">Add Internship</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- add students modals -->
+  <div class="modal fade" id="addStudentMarkModal" tabindex="-1" role="dialog" aria-labelledby="addStudentMarkModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="post" action="{% url 'add_student_mark' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addStudentMarkModalLabel">Add Student Mark</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+            {{ student_mark_form.as_p }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-warning">Add Mark</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- add attendence modals -->
+  <div class="modal fade" id="addDailyStatusModal" tabindex="-1" role="dialog" aria-labelledby="addDailyStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="post" action="{% url 'add_daily_status' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addDailyStatusModalLabel">Add Daily Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+            {{ daily_status_form.as_p }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-info">Add Status</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+{% endblock %}
